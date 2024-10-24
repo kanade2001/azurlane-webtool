@@ -7,14 +7,16 @@ interface ExpCalculatorState {
   target_max_exp: number;
 }
 
+type ExpCalculatorField = "current" | "target";
+
 type ExpCalculatorAction =
   | {
       type: "SET_LEVEL";
-      payload: { field: ["current" | "target"]; level: number };
+      payload: { field: ExpCalculatorField; level: number };
     }
   | {
       type: "SET_EXP";
-      payload: { field: ["current" | "target"]; exp: number };
+      payload: { field: ExpCalculatorField; exp: number };
     };
 
 export const ExpCalculatorReducer = (

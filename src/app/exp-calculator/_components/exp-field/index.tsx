@@ -7,7 +7,7 @@ interface ExpFieldProps {
   setLevel: (level: number) => void;
   exp: number;
   setExp: (exp: number) => void;
-  maxexp: number;
+  max_exp: number;
 }
 
 export default function ExpField({ label }: ExpFieldProps) {
