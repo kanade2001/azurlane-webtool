@@ -1,3 +1,5 @@
+"use client";
+
 export default function ExpCalculatorPage() {
   return (
     <div className="px-5">
