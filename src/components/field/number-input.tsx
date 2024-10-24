@@ -1,7 +1,13 @@
-const NumberInput = () => {
+interface NumberInputProps {
+  max_width?: string;
+}
+
+const NumberInput = (props: NumberInputProps) => {
   return (
-    <form className="mx-auto max-w-xs">
-      <div className="relative flex max-w-[8rem] items-center">
+    <form className="w-full">
+      <div
+        className={`relative flex max-w-[${props.max_width || 8}rem] items-center`}
+      >
         <button
           type="button"
           id="decrement-button"

@@ -10,9 +10,9 @@ export default function ExpField({ label }: ExpFieldProps) {
       <h2 className="text-xl">{label}</h2>
       <div className="grid grid-cols-[1fr_3fr] items-center justify-items-start gap-4">
         <h3> Level:</h3>
-        <NumberInput />
+        <NumberInput max_width="10" />
         <h3> Exp:</h3>
-        <NumberInput />
+        <NumberInput max_width="10" />
       </div>
     </div>
   );
