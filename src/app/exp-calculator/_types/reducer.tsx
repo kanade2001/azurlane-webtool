@@ -25,7 +25,7 @@ export const ExpCalculatorReducer = (
 ) => {
   switch (action.type) {
     case "SET_LEVEL":
-      const _level = Math.min(Math.max(action.payload.level, 1), 100);
+      const _level = Math.min(Math.max(action.payload.level, 1), 125);
       return {
         ...state,
         [`${action.payload.field}_level`]: _level,
