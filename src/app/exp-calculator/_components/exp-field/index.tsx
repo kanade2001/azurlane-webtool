@@ -4,7 +4,7 @@ interface ExpFieldProps {
 
 export default function ExpField({ label }: ExpFieldProps) {
   return (
-    <div>
+    <div className="mb-5 rounded-lg border p-2">
       <h2 className="text-xl">{label}</h2>
     </div>
   );
