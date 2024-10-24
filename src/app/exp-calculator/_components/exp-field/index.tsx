@@ -3,6 +3,11 @@ import { LineButton } from "@/components/button";
 
 interface ExpFieldProps {
   label: string;
+  level: number;
+  setLevel: (level: number) => void;
+  exp: number;
+  setExp: (exp: number) => void;
+  maxexp: number;
 }
 
 export default function ExpField({ label }: ExpFieldProps) {
