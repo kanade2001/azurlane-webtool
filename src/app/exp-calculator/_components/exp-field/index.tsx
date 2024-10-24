@@ -10,10 +10,10 @@ interface ExpFieldProps {
   max_exp: number;
 }
 
-export default function ExpField({ label }: ExpFieldProps) {
+export default function ExpField(props: ExpFieldProps) {
   return (
     <div className="mb-5 rounded-lg border p-2">
-      <h2 className="text-xl">{label}</h2>
+      <h2 className="text-xl">{props.label}</h2>
       <div className="flex flex-col items-center gap-4">
         <h3>Level</h3>
         <NumberInput
