@@ -12,6 +12,14 @@ export default function ExpField({ label }: ExpFieldProps) {
       <div className="flex flex-col items-center gap-4">
         <h3>Level</h3>
         <NumberInput max_width="full" />
+        <LineButton
+          buttons={[
+            { label: "100", onClick: () => console.log("100") },
+            { label: "110", onClick: () => console.log("300") },
+            { label: "120", onClick: () => console.log("200") },
+            { label: "125", onClick: () => console.log("300") },
+          ]}
+        />
         <h3>Exp</h3>
         <NumberInput max_width="full" />{" "}
         <LineButton
