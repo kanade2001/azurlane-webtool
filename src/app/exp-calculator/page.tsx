@@ -6,10 +6,10 @@ import { ExpField } from "./_components";
 
 export default function ExpCalculatorPage() {
   const [state, dispatch] = useReducer(ExpCalculatorReducer, {
-    current_level: 1,
+    current_level: 120,
     current_exp: 0,
     current_max_exp: 0,
-    target_level: 1,
+    target_level: 125,
     target_exp: 0,
     target_max_exp: 0,
   });
