@@ -1,4 +1,5 @@
 import { NumberInput } from "@/components/field";
+import { LineButton } from "@/components/button";
 
 interface ExpFieldProps {
   label: string;
@@ -13,26 +14,13 @@ export default function ExpField({ label }: ExpFieldProps) {
         <NumberInput max_width="full" />
         <h3>Exp</h3>
         <NumberInput max_width="full" />{" "}
-        <div className="flex w-full">
-          <button
-            type="button"
-            className="h-11 flex-1 rounded-s-lg border border-gray-300 bg-gray-100 p-3 text-sm hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700"
-          >
-            0
-          </button>
-          <button
-            type="button"
-            className="h-11 flex-1 border border-gray-300 bg-gray-100 p-3 text-sm hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700"
-          >
-            1500K
-          </button>
-          <button
-            type="button"
-            className="h-11 flex-1 rounded-e-lg border border-gray-300 bg-gray-100 p-3 text-sm hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700"
-          >
-            3000K
-          </button>
-        </div>
+        <LineButton
+          buttons={[
+            { label: "0", onClick: () => console.log("0") },
+            { label: "1450K", onClick: () => console.log("1450K") },
+            { label: "3000K", onClick: () => console.log("3000K") },
+          ]}
+        />
       </div>
     </div>
   );
