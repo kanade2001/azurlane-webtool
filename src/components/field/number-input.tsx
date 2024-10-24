@@ -6,7 +6,7 @@ const NumberInput = (props: NumberInputProps) => {
   return (
     <form className="w-full">
       <div
-        className={`relative flex max-w-[${props.max_width || 8}rem] items-center`}
+        className={`relative flex max-w-[${props.max_width || "8rem"}] items-center`}
       >
         <button
           type="button"
