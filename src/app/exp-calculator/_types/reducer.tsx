@@ -5,7 +5,6 @@ interface ExpCalculatorState {
   target_level: number;
   target_exp: number;
   target_max_exp: number;
-
 }
 
 type ExpCalculatorField = "current" | "target";
@@ -18,8 +17,7 @@ type ExpCalculatorAction =
   | {
       type: "SET_EXP";
       payload: { field: ExpCalculatorField; exp: number };
-    }
-
+    };
 
 export const ExpCalculatorReducer = (
   state: ExpCalculatorState,
