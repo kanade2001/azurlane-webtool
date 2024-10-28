@@ -10,15 +10,46 @@ interface PreferenceFieldProps {
 
 // 周回設定フィールド
 export default function PreferenceField(props: PreferenceFieldProps) {
-  const [areaCategory, setAreaCategory] = useState("Normal");
-  const [customExp, setCustomExp] = useState(0); // 道中経験値
-  const [customExpBoss, setCustomExpBoss] = useState(0); // 中枢経験値
-  const [selectedArea, setSelectedArea] = useState(InitialExpData);
-  const [normalBattle, setNormalBattle] = useState(true);
-  const [bossBattle, setBossBattle] = useState(false);
+  const [areaCategory, setAreaCategory] = useState<string>("Normal");
+  const [selectedArea, setSelectedArea] = useState<string>("12-4");
+  const [area, setArea] = useState<ExpDataType>(InitialExpData);
+  const [battle, setBattle] = useState<[boolean, boolean]>([true, false]);
+
+  const handleSelectCategory = (category: string) => {
+    setAreaCategory(category);
+    if (category === "Custom") {
+      setArea({
+        id: "custom",
+        label: "カスタム",
+        exp: [0, 0, 0, 0],
+        num_battles: 5,
+        num_battles_b: 1,
+      });
+    } else {
+      setArea(
+        ExpData.find((data) => data.id === selectedArea) || InitialExpData,
+      );
+    }
+  };
 
   const handleSelectedArea = (area: string) => {
-    setSelectedArea(ExpData.find((data) => data.id === area) || InitialExpData);
+    setSelectedArea(area);
+    setArea(ExpData.find((data) => data.id === area) || InitialExpData);
+  };
+
+  const handleCustomExp = (index: number, exp: number) => {
+    // カスタム海域の経験値を更新
+    const newExp = [...area.exp];
+    newExp[index] = exp;
+    setArea({ ...area, exp: newExp });
+  };
+  const handleCustomBattle = (index: number, num: number) => {
+    // カスタム海域の戦闘回数を更新
+    if (index === 0) {
+      setArea({ ...area, num_battles: num });
+    } else {
+      setArea({ ...area, num_battles_b: num });
+    }
   };
 
   return (
@@ -31,7 +62,7 @@ export default function PreferenceField(props: PreferenceFieldProps) {
             id="area"
             value={areaCategory}
             setValue={(area) => {
-              setAreaCategory(area);
+              handleSelectCategory(area);
             }}
             options={[
               {
@@ -46,7 +77,7 @@ export default function PreferenceField(props: PreferenceFieldProps) {
           />
           <SelectInput
             id="area"
-            value={selectedArea.id}
+            value={selectedArea}
             setValue={(area) => {
               handleSelectedArea(area);
             }}
@@ -62,14 +93,14 @@ export default function PreferenceField(props: PreferenceFieldProps) {
             <p>経験値</p>
             <NumberInput
               id="custom-exp"
-              value={customExp}
-              setValue={(exp) => setCustomExp(exp)}
+              value={area.exp[0]}
+              setValue={(exp) => handleCustomExp(0, exp)}
             />
             <p>ボス経験値</p>
             <NumberInput
               id="custom-exp-boss"
-              value={customExpBoss}
-              setValue={(exp) => setCustomExpBoss(exp)}
+              value={area.exp[3]}
+              setValue={(exp) => handleCustomExp(3, exp)}
             />
           </div>
         ) : (
@@ -77,68 +108,60 @@ export default function PreferenceField(props: PreferenceFieldProps) {
             <p>小型</p>
             <NumberInput
               id="exp-s"
-              value={selectedArea.exp[0]}
+              value={area.exp[0]}
               setValue={() => {}}
               disabled
             />
             <p>中型</p>
             <NumberInput
               id="exp-m"
-              value={selectedArea.exp[1]}
+              value={area.exp[1]}
               setValue={() => {}}
               disabled
             />
             <p>大型</p>
             <NumberInput
               id="exp-l"
-              value={selectedArea.exp[2]}
+              value={area.exp[2]}
               setValue={() => {}}
               disabled
             />
             <p>ボス</p>
             <NumberInput
               id="exp-b"
-              value={selectedArea.exp[3]}
+              value={area.exp[3]}
               setValue={() => {}}
               disabled
             />
           </div>
         )}
-        {areaCategory === "Custom" ? (
-          <div></div>
-        ) : (
-          <div className="grid w-full grid-cols-3 items-center gap-2 text-center">
-            <p>道中</p>
-            <ToggleButton
-              id="toggle"
-              value={normalBattle}
-              setValue={() => {
-                setNormalBattle(!normalBattle);
-                console.log(normalBattle);
-              }}
-            />
-            <NumberInput
-              id="num_battles"
-              value={selectedArea.num_battles}
-              setValue={() => {}}
-              disabled
-            />
-            <p>ボス</p>
-            <ToggleButton
-              id="toggle"
-              value={bossBattle}
-              setValue={() => {
-                setBossBattle(!bossBattle);
-              }}
-            />
-            <NumberInput
-              id="num_battles_b"
-              value={selectedArea.num_battles_b || 1}
-              setValue={() => {}}
-              disabled
-            />
-          </div>
-        )}
+
+        <div className="grid w-full grid-cols-3 items-center gap-2 text-center">
+          <p>道中</p>
+          <ToggleButton
+            id="toggle"
+            value={battle[0]}
+            setValue={() => setBattle([!battle[0], battle[1]])}
+          />
+          <NumberInput
+            id="num_battles"
+            value={area.num_battles}
+            setValue={() => {}}
+            disabled
+          />
+          <p>ボス</p>
+          <ToggleButton
+            id="toggle"
+            value={battle[1]}
+            setValue={() => setBattle([battle[0], !battle[1]])}
+          />
+          <NumberInput
+            id="num_battles_b"
+            value={area.num_battles_b || 1}
+            setValue={() => {}}
+            disabled
+          />
+        </div>
       </div>
     </div>
   );
