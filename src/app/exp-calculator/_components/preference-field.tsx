@@ -1,3 +1,5 @@
+import { SelectInput } from "@/components/field";
+
 interface PreferenceFieldProps {
   label: string;
 }
@@ -7,6 +9,16 @@ export default function PreferenceField(props: PreferenceFieldProps) {
   return (
     <div className="mb-5 rounded-lg border p-2">
       <h2 className="text-xl">{props.label}</h2>
+      <div className="flex flex-col items-center gap-4">
+        <h3>海域</h3>
+        <SelectInput
+          id="area"
+          options={[
+            { value: "1", label: "1-1" },
+            { value: "2", label: "1-2" },
+          ]}
+        />
+      </div>
     </div>
   );
 }
