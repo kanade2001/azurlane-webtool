@@ -71,7 +71,7 @@ export default function PreferenceField(props: PreferenceFieldProps) {
             />
           </div>
         ) : (
-          <div className="grid w-full grid-cols-8 items-center gap-2">
+          <div className="grid w-full grid-cols-8 items-center gap-2 text-center">
             <p>小型</p>
             <NumberInput
               id="exp-s"
