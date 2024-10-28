@@ -15,8 +15,9 @@ export default function ExpField(props: ExpFieldProps) {
     <div className="mb-5 rounded-lg border p-2">
       <h2 className="text-xl">{props.label}</h2>
       <div className="flex flex-col items-center gap-4">
-        <h3>Level</h3>
+        <h3 className="text-xl">Level</h3>
         <NumberInputWithButton
+          id="level"
           max_width="full"
           value={props.level}
           setValue={(value) => props.setLevel(value)}
@@ -29,8 +30,9 @@ export default function ExpField(props: ExpFieldProps) {
             { label: "125", onClick: () => props.setLevel(125) },
           ]}
         />
-        <h3>Exp</h3>
+        <h3 className="text-xl">Exp</h3>
         <NumberInputWithButton
+          id="exp"
           max_width="full"
           value={props.exp}
           setValue={(value) => props.setExp(value)}
