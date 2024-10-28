@@ -1,9 +1,16 @@
-type ExpDataType = {
+export type ExpDataType = {
   id: string;
   label: string;
   exp: number[]; // [exp_s, exp_m, exp_l, exp_b]
   num_battles: number; // 通常戦闘の数
   num_battles_b?: number; // ボス戦の数
+};
+
+export const InitialExpData: ExpDataType = {
+  id: "12-4",
+  label: "12-4",
+  exp: [921, 1024, 1106, 1347],
+  num_battles: 6,
 };
 
 export const ExpData: ExpDataType[] = [

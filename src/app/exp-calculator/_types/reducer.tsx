@@ -5,7 +5,7 @@ interface ExpCalculatorState {
   target_level: number;
   target_exp: number;
   target_max_exp: number;
-  area: string; // 海域
+
 }
 
 type ExpCalculatorField = "current" | "target";
@@ -19,10 +19,7 @@ type ExpCalculatorAction =
       type: "SET_EXP";
       payload: { field: ExpCalculatorField; exp: number };
     }
-  | {
-      type: "SET_AREA";
-      payload: { area: string };
-    };
+
 
 export const ExpCalculatorReducer = (
   state: ExpCalculatorState,
@@ -41,11 +38,7 @@ export const ExpCalculatorReducer = (
         ...state,
         [`${action.payload.field}_exp`]: _exp,
       };
-    case "SET_AREA":
-      return {
-        ...state,
-        area: action.payload.area,
-      };
+
     default:
       return state;
   }

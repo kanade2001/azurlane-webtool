@@ -1,13 +1,11 @@
 import { useState } from "react";
 
 import { NumberInput, SelectInput } from "@/components/field";
-import { ExpData } from "../_data/exp-data";
+import { ExpData, ExpDataType, InitialExpData } from "../_data/exp-data";
 import exp from "constants";
 
 interface PreferenceFieldProps {
   label: string;
-  area: string;
-  setArea: (area: string) => void;
 }
 
 // 周回設定フィールド
@@ -15,6 +13,11 @@ export default function PreferenceField(props: PreferenceFieldProps) {
   const [areaCategory, setAreaCategory] = useState("Normal");
   const [customExp, setCustomExp] = useState(0); // 道中経験値
   const [customExpBoss, setCustomExpBoss] = useState(0); // 中枢経験値
+  const [selectedArea, setSelectedArea] = useState(InitialExpData);
+
+  const handleSelectedArea = (area: string) => {
+    setSelectedArea(ExpData.find((data) => data.id === area) || InitialExpData);
+  };
 
   return (
     <div className="mb-5 rounded-lg border p-2">
@@ -41,8 +44,10 @@ export default function PreferenceField(props: PreferenceFieldProps) {
           />
           <SelectInput
             id="area"
-            value={props.area}
-            setValue={props.setArea}
+            value={selectedArea.id}
+            setValue={(area) => {
+              handleSelectedArea(area);
+            }}
             options={ExpData.map((data) => ({
               value: data.id,
               label: data.label,
@@ -65,7 +70,38 @@ export default function PreferenceField(props: PreferenceFieldProps) {
               setValue={(exp) => setCustomExpBoss(exp)}
             />
           </div>
-        ) : null}
+        ) : (
+          <div className="grid w-full grid-cols-8 items-center gap-2">
+            <p>小型</p>
+            <NumberInput
+              id="exp-s"
+              value={selectedArea.exp[0]}
+              setValue={() => {}}
+              disabled
+            />
+            <p>中型</p>
+            <NumberInput
+              id="exp-m"
+              value={selectedArea.exp[1]}
+              setValue={() => {}}
+              disabled
+            />
+            <p>大型</p>
+            <NumberInput
+              id="exp-l"
+              value={selectedArea.exp[2]}
+              setValue={() => {}}
+              disabled
+            />
+            <p>ボス</p>
+            <NumberInput
+              id="exp-b"
+              value={selectedArea.exp[3]}
+              setValue={() => {}}
+              disabled
+            />
+          </div>
+        )}
       </div>
     </div>
   );
