@@ -40,6 +40,7 @@ export default function ExpField(props: ExpFieldProps) {
           max_value={props.max_exp}
           value={props.exp}
           onChange={(exp) => props.setExp(exp)}
+          show_label
         />
         <LineButton
           buttons={[

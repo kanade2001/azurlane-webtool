@@ -3,6 +3,7 @@ interface SlideInputProps {
   onChange: (value: number) => void;
   min_value: number;
   max_value: number;
+  show_label: boolean;
 }
 
 const CalcRatio = (value: number, min: number, max: number) => {
@@ -27,6 +28,12 @@ const SlideInput: React.FC<SlideInputProps> = (props: SlideInputProps) => {
           )
         }
       />
+      {props.show_label && (
+        <div className="flex w-full justify-between text-sm text-gray-500">
+          <span className="text-left">{props.min_value}</span>
+          <span className="text-right">{props.max_value}</span>
+        </div>
+      )}
     </div>
   );
 };
