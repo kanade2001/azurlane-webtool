@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import {
   NumberInput,
@@ -14,10 +14,12 @@ interface PreferenceFieldProps {
 
 // 周回設定フィールド
 export default function PreferenceField(props: PreferenceFieldProps) {
-  const [areaCategory, setAreaCategory] = useState<string>("Normal");
-  const [selectedArea, setSelectedArea] = useState<string>("12-4");
-  const [area, setArea] = useState<ExpDataType>(InitialExpData);
-  const [battle, setBattle] = useState<[boolean, boolean]>([true, false]);
+  const [areaCategory, setAreaCategory] = useState<string>("Normal"); // Normal or Custom
+  const [selectedArea, setSelectedArea] = useState<string>("12-4"); // 選択された海域
+  const [area, setArea] = useState<ExpDataType>(InitialExpData); // 選択された海域の経験値データ
+  const [battle, setBattle] = useState<[boolean, boolean]>([true, false]); // 道中とボスの戦闘有無
+  const [expBonus, setExpBonus] = useState<number[]>([20, 0, 0, 0]); // 経験値ボーナス
+  const [exp, setExp] = useState<number[]>([0, 0]); // 経験値
 
   const handleSelectCategory = (category: string) => {
     setAreaCategory(category);
@@ -37,6 +39,7 @@ export default function PreferenceField(props: PreferenceFieldProps) {
   };
 
   const handleSelectedArea = (area: string) => {
+    // 選択された海域の経験値データを取得
     setSelectedArea(area);
     setArea(ExpData.find((data) => data.id === area) || InitialExpData);
   };
@@ -56,6 +59,19 @@ export default function PreferenceField(props: PreferenceFieldProps) {
       setArea({ ...area, num_battles_b: _num });
     }
   };
+
+  useEffect(() => {
+    const exp_a_min = area.exp[0] * area.num_battles * (battle[0] ? 1 : 0); // 道中の最小経験値
+    const exp_a_max = area.exp[2] * area.num_battles * (battle[0] ? 1 : 0); // 道中の最大経験値
+    const exp_b = area.exp[3] * (area.num_battles_b || 1) * (battle[1] ? 1 : 0); // ボスの経験値
+    const bonus = expBonus.reduce((acc, cur) => (acc * (cur + 100)) / 100, 1.0);
+    console.log(exp_a_min, exp_a_max, exp_b, bonus);
+
+    setExp([
+      Math.round(((exp_a_min + exp_b) * bonus) / 1.2),
+      Math.round(((exp_a_max + exp_b) * bonus) / 1.2),
+    ]);
+  }, [area, battle, expBonus]);
 
   return (
     <div className="mb-5 rounded-lg border p-2">
@@ -191,32 +207,95 @@ export default function PreferenceField(props: PreferenceFieldProps) {
         </div>
 
         <h3 className="text-xl">経験値ボーナス</h3>
+        <div className="grid w-full grid-cols-[2fr_1fr] items-center gap-2 text-center">
+          <div className="flex items-center justify-between">
+            <p>コンディション</p>{" "}
+            <ToggleButton
+              id="condition_bonus"
+              value={expBonus[0] > 0}
+              setValue={() =>
+                setExpBonus([
+                  expBonus[0] > 0 ? 0 : 20,
+                  expBonus[1],
+                  expBonus[2],
+                  expBonus[3],
+                ])
+              }
+            />
+          </div>
+          <NumberInput
+            id="num_battles_b"
+            value={expBonus[0]}
+            setValue={() => {}}
+            disabled
+          />
+          <div className="flex items-center justify-between">
+            <p>MVP</p>
+            <ToggleButton
+              id="condition_bonus"
+              value={expBonus[1] > 0}
+              setValue={() =>
+                setExpBonus([
+                  expBonus[0],
+                  expBonus[1] > 0 ? 0 : 100,
+                  expBonus[2],
+                  expBonus[3],
+                ])
+              }
+            />
+          </div>
+          <NumberInput
+            id="num_battles_b"
+            value={expBonus[1]}
+            setValue={() => {}}
+            disabled
+          />
+          <div className="flex items-center justify-between">
+            <p>旗艦</p>{" "}
+            <ToggleButton
+              id="condition_bonus"
+              value={expBonus[2] > 0}
+              setValue={() =>
+                setExpBonus([
+                  expBonus[0],
+                  expBonus[1],
+                  expBonus[2] > 0 ? 0 : 50,
+                  expBonus[3],
+                ])
+              }
+            />
+          </div>
+          <NumberInput
+            id="num_battles_b"
+            value={expBonus[2]}
+            setValue={() => {}}
+            disabled
+          />
+          <div className="flex items-center justify-between">
+            <p>その他</p>
+          </div>
+          <NumberInput
+            id="num_battles_b"
+            value={expBonus[3]}
+            setValue={(value) => {
+              setExpBonus([expBonus[0], expBonus[1], expBonus[2], value]);
+            }}
+          />
+        </div>
+
+        <h3 className="text-xl">周回情報</h3>
         <div className="grid w-full grid-cols-2 items-center gap-2 text-center">
-          <p>コンディション</p>
+          <p>最小経験値</p>
           <NumberInput
-            id="num_battles_b"
-            value={20}
+            id="exp-min"
+            value={exp[0]}
             setValue={() => {}}
             disabled
           />
-          <p>MVP</p>
+          <p>最大経験値</p>
           <NumberInput
-            id="num_battles_b"
-            value={100}
-            setValue={() => {}}
-            disabled
-          />
-          <p>旗艦</p>
-          <NumberInput
-            id="num_battles_b"
-            value={50}
-            setValue={() => {}}
-            disabled
-          />
-          <p>その他</p>
-          <NumberInput
-            id="num_battles_b"
-            value={0}
+            id="exp-max"
+            value={exp[1]}
             setValue={() => {}}
             disabled
           />
