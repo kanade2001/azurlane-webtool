@@ -2,7 +2,7 @@
 
 import { useReducer } from "react";
 import { ExpCalculatorReducer } from "./_types/reducer";
-import { ExpField } from "./_components";
+import { ExpField, PreferenceField } from "./_components";
 
 export default function ExpCalculatorPage() {
   const [state, dispatch] = useReducer(ExpCalculatorReducer, {
@@ -47,6 +47,7 @@ export default function ExpCalculatorPage() {
           setLevel={setTargetLevel}
           setExp={setTargetExp}
         />
+        <PreferenceField label="周回設定" />
         <div className="mb-5 rounded-lg border p-2">
           <h2 className="text-xl">周回設定</h2>
         </div>
