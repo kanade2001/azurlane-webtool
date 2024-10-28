@@ -8,7 +8,7 @@ export default function ExpCalculatorPage() {
   const [state, dispatch] = useReducer(ExpCalculatorReducer, {
     current_level: 120,
     current_exp: 0,
-    current_max_exp: 3000000,
+    current_max_exp: 300,
     target_level: 125,
     target_exp: 0,
     target_max_exp: 3000000,

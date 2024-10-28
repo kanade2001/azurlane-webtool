@@ -3,7 +3,6 @@ interface SlideInputProps {
   onChange: (value: number) => void;
   min_value: number;
   max_value: number;
-  span_value?: number;
   show_label: boolean;
 }
 
@@ -11,16 +10,8 @@ const CalcRatio = (value: number, min: number, max: number) => {
   return Math.round(((value - min) / (max - min)) * 100);
 };
 
-const CalcValue = (
-  ratio: number,
-  min: number,
-  max: number,
-  span: number = 1,
-) => {
-  return Math.min(
-    min + Math.round(((max - min) * (ratio / 100)) / span) * span,
-    max,
-  );
+const CalcValue = (ratio: number, min: number, max: number) => {
+  return Math.min(min + Math.round((max - min) * (ratio / 100)), max);
 };
 
 const SlideInput: React.FC<SlideInputProps> = (props: SlideInputProps) => {
