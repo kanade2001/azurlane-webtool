@@ -1,7 +1,8 @@
 import { useState } from "react";
 
-import { SelectInput } from "@/components/field";
+import { NumberInput, SelectInput } from "@/components/field";
 import { ExpData } from "../_data/exp-data";
+import exp from "constants";
 
 interface PreferenceFieldProps {
   label: string;
@@ -12,6 +13,8 @@ interface PreferenceFieldProps {
 // 周回設定フィールド
 export default function PreferenceField(props: PreferenceFieldProps) {
   const [areaCategory, setAreaCategory] = useState("Normal");
+  const [customExp, setCustomExp] = useState(0); // 道中経験値
+  const [customExpBoss, setCustomExpBoss] = useState(0); // 中枢経験値
 
   return (
     <div className="mb-5 rounded-lg border p-2">
@@ -47,6 +50,22 @@ export default function PreferenceField(props: PreferenceFieldProps) {
             disabled={areaCategory === "Custom"}
           />
         </div>
+        {areaCategory === "Custom" ? (
+          <div className="grid w-full grid-cols-4 items-center gap-2">
+            <p>経験値</p>
+            <NumberInput
+              id="custom-exp"
+              value={customExp}
+              setValue={(exp) => setCustomExp(exp)}
+            />
+            <p>ボス経験値</p>
+            <NumberInput
+              id="custom-exp-boss"
+              value={customExpBoss}
+              setValue={(exp) => setCustomExpBoss(exp)}
+            />
+          </div>
+        ) : null}
       </div>
     </div>
   );
