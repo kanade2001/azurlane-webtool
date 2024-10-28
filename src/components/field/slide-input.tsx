@@ -6,7 +6,7 @@ interface SlideInputProps {
 }
 
 const CalcRatio = (value: number, min: number, max: number) => {
-  return ((value - min) / (max - min)) * 100;
+  return Math.round(((value - min) / (max - min)) * 100);
 };
 
 const CalcValue = (ratio: number, min: number, max: number) => {
