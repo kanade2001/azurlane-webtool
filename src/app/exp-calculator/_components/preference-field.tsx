@@ -65,7 +65,6 @@ export default function PreferenceField(props: PreferenceFieldProps) {
     const exp_a_max = area.exp[2] * area.num_battles * (battle[0] ? 1 : 0); // 道中の最大経験値
     const exp_b = area.exp[3] * (area.num_battles_b || 1) * (battle[1] ? 1 : 0); // ボスの経験値
     const bonus = expBonus.reduce((acc, cur) => (acc * (cur + 100)) / 100, 1.0);
-    console.log(exp_a_min, exp_a_max, exp_b, bonus);
 
     setExp([
       Math.round(((exp_a_min + exp_b) * bonus) / 1.2),
