@@ -89,7 +89,7 @@ export default function PreferenceField(props: PreferenceFieldProps) {
           />
         </div>
         {areaCategory === "Custom" ? (
-          <div className="grid w-full grid-cols-2 items-center gap-2">
+          <div className="grid w-full grid-cols-2 items-center gap-2 text-center">
             <p>経験値</p>
             <NumberInput
               id="custom-exp"
@@ -136,25 +136,29 @@ export default function PreferenceField(props: PreferenceFieldProps) {
           </div>
         )}
 
-        <div className="grid w-full grid-cols-3 items-center gap-2 text-center">
-          <p>道中</p>
-          <ToggleButton
-            id="toggle"
-            value={battle[0]}
-            setValue={() => setBattle([!battle[0], battle[1]])}
-          />
+        <div className="grid w-full grid-cols-2 items-center gap-2 text-center">
+          <div className="flex items-center justify-between">
+            <p className="grow">道中</p>
+            <ToggleButton
+              id="toggle"
+              value={battle[0]}
+              setValue={() => setBattle([!battle[0], battle[1]])}
+            />
+          </div>
           <NumberInput
             id="num_battles"
             value={area.num_battles}
             setValue={() => {}}
             disabled
           />
-          <p>ボス</p>
-          <ToggleButton
-            id="toggle"
-            value={battle[1]}
-            setValue={() => setBattle([battle[0], !battle[1]])}
-          />
+          <div className="flex items-center justify-between">
+            <p className="grow">ボス</p>
+            <ToggleButton
+              id="toggle"
+              value={battle[1]}
+              setValue={() => setBattle([battle[0], !battle[1]])}
+            />
+          </div>
           <NumberInput
             id="num_battles_b"
             value={area.num_battles_b || 1}
