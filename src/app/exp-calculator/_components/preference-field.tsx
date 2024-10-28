@@ -102,6 +102,28 @@ export default function PreferenceField(props: PreferenceFieldProps) {
             />
           </div>
         )}
+        {areaCategory === "Custom" ? (
+          <div></div>
+        ) : (
+          <div className="grid w-full grid-cols-[1fr_2fr_1fr_1fr_2fr_1fr] items-center gap-2 text-center">
+            <p>道中</p>
+            <p>トグル</p>
+            <NumberInput
+              id="num_battles"
+              value={selectedArea.num_battles}
+              setValue={() => {}}
+              disabled
+            />
+            <p>ボス</p>
+            <p>トグル</p>
+            <NumberInput
+              id="num_battles_b"
+              value={selectedArea.num_battles_b || 1}
+              setValue={() => {}}
+              disabled
+            />
+          </div>
+        )}
       </div>
     </div>
   );
