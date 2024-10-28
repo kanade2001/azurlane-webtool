@@ -1,10 +1,10 @@
-interface NumberInputProps {
+interface NumberInputWithButtonProps {
   max_width?: string;
   value: number;
   setValue: (value: number) => void;
 }
 
-const NumberInput = (props: NumberInputProps) => {
+const NumberInputWithButton = (props: NumberInputWithButtonProps) => {
   return (
     <div className="w-full">
       <div
@@ -72,4 +72,4 @@ const NumberInput = (props: NumberInputProps) => {
   );
 };
 
-export default NumberInput;
+export default NumberInputWithButton;

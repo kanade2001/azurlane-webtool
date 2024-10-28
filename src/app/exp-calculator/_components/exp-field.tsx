@@ -1,4 +1,4 @@
-import { NumberInput, SlideInput } from "@/components/field";
+import { NumberInputWithButton, SlideInput } from "@/components/field";
 import { LineButton } from "@/components/button";
 
 interface ExpFieldProps {
@@ -16,7 +16,7 @@ export default function ExpField(props: ExpFieldProps) {
       <h2 className="text-xl">{props.label}</h2>
       <div className="flex flex-col items-center gap-4">
         <h3>Level</h3>
-        <NumberInput
+        <NumberInputWithButton
           max_width="full"
           value={props.level}
           setValue={(value) => props.setLevel(value)}
@@ -30,7 +30,7 @@ export default function ExpField(props: ExpFieldProps) {
           ]}
         />
         <h3>Exp</h3>
-        <NumberInput
+        <NumberInputWithButton
           max_width="full"
           value={props.exp}
           setValue={(value) => props.setExp(value)}
