@@ -1,4 +1,4 @@
-import { NumberInput } from "@/components/field";
+import { NumberInput, SlideInput } from "@/components/field";
 import { LineButton } from "@/components/button";
 
 interface ExpFieldProps {
@@ -34,6 +34,13 @@ export default function ExpField(props: ExpFieldProps) {
           max_width="full"
           value={props.exp}
           setValue={(value) => props.setExp(value)}
+        />
+        <SlideInput
+          min_value={0}
+          max_value={props.max_exp}
+          value={props.exp}
+          onChange={(exp) => props.setExp(exp)}
+          show_label
         />
         <LineButton
           buttons={[
