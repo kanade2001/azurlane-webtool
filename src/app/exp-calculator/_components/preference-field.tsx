@@ -58,7 +58,7 @@ export default function PreferenceField(props: PreferenceFieldProps) {
           />
         </div>
         {areaCategory === "Custom" ? (
-          <div className="grid w-full grid-cols-4 items-center gap-2">
+          <div className="grid w-full grid-cols-2 items-center gap-2">
             <p>経験値</p>
             <NumberInput
               id="custom-exp"
@@ -73,7 +73,7 @@ export default function PreferenceField(props: PreferenceFieldProps) {
             />
           </div>
         ) : (
-          <div className="grid w-full grid-cols-8 items-center gap-2 text-center">
+          <div className="grid w-full grid-cols-4 items-center gap-2 text-center">
             <p>小型</p>
             <NumberInput
               id="exp-s"
@@ -107,7 +107,7 @@ export default function PreferenceField(props: PreferenceFieldProps) {
         {areaCategory === "Custom" ? (
           <div></div>
         ) : (
-          <div className="grid w-full grid-cols-6 items-center gap-2 text-center">
+          <div className="grid w-full grid-cols-3 items-center gap-2 text-center">
             <p>道中</p>
             <ToggleButton
               id="toggle"
