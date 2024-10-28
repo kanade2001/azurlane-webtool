@@ -36,6 +36,7 @@ export const ExpCalculatorReducer = (
         ...state,
         [`${action.payload.field}_exp`]: _exp,
       };
+
     default:
       return state;
   }
