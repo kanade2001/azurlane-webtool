@@ -6,7 +6,7 @@ interface NumberInputProps {
 
 const NumberInput = (props: NumberInputProps) => {
   return (
-    <form className="w-full">
+    <div className="w-full">
       <div
         className={`relative flex max-w-[${props.max_width || "8rem"}] items-center`}
       >
@@ -68,7 +68,7 @@ const NumberInput = (props: NumberInputProps) => {
           </svg>
         </button>
       </div>
-    </form>
+    </div>
   );
 };
 
