@@ -35,7 +35,7 @@ export default function ExpField(props: ExpFieldProps) {
           value={props.exp}
           setValue={(value) => props.setExp(value)}
         />
-        <SlideInput min_value={0} max_value={props.max_exp} />
+        <SlideInput min_value={0} max_value={props.max_exp} value={props.exp} />
         <LineButton
           buttons={[
             { label: "0", onClick: () => props.setExp(0) },

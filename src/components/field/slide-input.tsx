@@ -1,4 +1,5 @@
 interface SlideInputProps {
+  value: number;
   min_value?: string | number;
   max_value?: string | number;
 }
@@ -9,7 +10,7 @@ const SlideInput: React.FC<SlideInputProps> = (props: SlideInputProps) => {
       <input
         id="slide-input"
         type="range"
-        value={50}
+        value={props.value}
         className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-gray-200 dark:bg-gray-700"
       ></input>
     </div>
