@@ -11,7 +11,7 @@ const CalcRatio = (value: number, min: number, max: number) => {
 };
 
 const CalcValue = (ratio: number, min: number, max: number) => {
-  return min + (max - min) * (ratio / 100);
+  return Math.min(min + Math.round((max - min) * (ratio / 100)), max);
 };
 
 const SlideInput: React.FC<SlideInputProps> = (props: SlideInputProps) => {
