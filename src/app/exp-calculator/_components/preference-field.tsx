@@ -1,8 +1,8 @@
 import { useState } from "react";
 
 import { NumberInput, SelectInput } from "@/components/field";
+import { ToggleButton } from "@/components/button";
 import { ExpData, ExpDataType, InitialExpData } from "../_data/exp-data";
-import exp from "constants";
 
 interface PreferenceFieldProps {
   label: string;
@@ -14,6 +14,8 @@ export default function PreferenceField(props: PreferenceFieldProps) {
   const [customExp, setCustomExp] = useState(0); // 道中経験値
   const [customExpBoss, setCustomExpBoss] = useState(0); // 中枢経験値
   const [selectedArea, setSelectedArea] = useState(InitialExpData);
+  const [normalBattle, setNormalBattle] = useState(true);
+  const [bossBattle, setBossBattle] = useState(false);
 
   const handleSelectedArea = (area: string) => {
     setSelectedArea(ExpData.find((data) => data.id === area) || InitialExpData);
@@ -105,9 +107,16 @@ export default function PreferenceField(props: PreferenceFieldProps) {
         {areaCategory === "Custom" ? (
           <div></div>
         ) : (
-          <div className="grid w-full grid-cols-[1fr_2fr_1fr_1fr_2fr_1fr] items-center gap-2 text-center">
+          <div className="grid w-full grid-cols-6 items-center gap-2 text-center">
             <p>道中</p>
-            <p>トグル</p>
+            <ToggleButton
+              id="toggle"
+              value={normalBattle}
+              setValue={() => {
+                setNormalBattle(!normalBattle);
+                console.log(normalBattle);
+              }}
+            />
             <NumberInput
               id="num_battles"
               value={selectedArea.num_battles}
@@ -115,7 +124,13 @@ export default function PreferenceField(props: PreferenceFieldProps) {
               disabled
             />
             <p>ボス</p>
-            <p>トグル</p>
+            <ToggleButton
+              id="toggle"
+              value={bossBattle}
+              setValue={() => {
+                setBossBattle(!bossBattle);
+              }}
+            />
             <NumberInput
               id="num_battles_b"
               value={selectedArea.num_battles_b || 1}
