@@ -12,6 +12,7 @@ export default function ExpCalculatorPage() {
     target_level: 125,
     target_exp: 0,
     target_max_exp: 3000000,
+    area: "12-4",
   });
 
   const setCurrentLevel = (level: number) => {
@@ -25,6 +26,9 @@ export default function ExpCalculatorPage() {
   };
   const setTargetExp = (exp: number) => {
     dispatch({ type: "SET_EXP", payload: { field: "target", exp } });
+  };
+  const setArea = (area: string) => {
+    dispatch({ type: "SET_AREA", payload: { area } });
   };
 
   return (
@@ -47,7 +51,7 @@ export default function ExpCalculatorPage() {
           setLevel={setTargetLevel}
           setExp={setTargetExp}
         />
-        <PreferenceField label="周回設定" />
+        <PreferenceField label="周回設定" area={state.area} setArea={setArea} />
         <div className="mb-5 rounded-lg border p-2">
           <h2 className="text-xl">周回設定</h2>
         </div>

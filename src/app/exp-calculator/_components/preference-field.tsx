@@ -1,7 +1,10 @@
 import { SelectInput } from "@/components/field";
+import { ExpData } from "../_data/exp-data";
 
 interface PreferenceFieldProps {
   label: string;
+  area: string;
+  setArea: (area: string) => void;
 }
 
 // 周回設定フィールド
@@ -14,17 +17,18 @@ export default function PreferenceField(props: PreferenceFieldProps) {
         <div className="grid w-full grid-cols-2 gap-2">
           <SelectInput
             id="area"
-            options={[
-              { value: "Normal", label: "ノーマル" },
-              { value: "Hard", label: "ハード" },
-            ]}
+            value={"Normal"}
+            setValue={() => {}}
+            options={[{ value: "Normal", label: "ノーマル" }]}
           />
           <SelectInput
             id="area"
-            options={[
-              { value: "1", label: "1-1" },
-              { value: "2", label: "1-2" },
-            ]}
+            value={props.area}
+            setValue={props.setArea}
+            options={ExpData.map((data) => ({
+              value: data.id,
+              label: data.label,
+            }))}
           />
         </div>
       </div>
