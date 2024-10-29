@@ -27,9 +27,7 @@ export default function PreferenceField(props: PreferenceFieldProps) {
     handleCustomBattle,
     setBattle,
     handleExpBonus,
-  } = usePreferences();
-
-  props.setExp(exp);
+  } = usePreferences(props.setExp);
 
   return (
     <div className="mb-5 rounded-lg border border-l border-gray-500 p-2">

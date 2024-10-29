@@ -8,7 +8,7 @@ import {
   InitialAreaExpData,
 } from "@/data/area-exp-data";
 
-export const usePreferences = () => {
+export const usePreferences = (setParentExp: (exp: number[]) => void) => {
   const [category, setCategory] = useState<string>("Normal");
   const [selected, setSelected] = useState<string>("12-4");
   const [area, setArea] = useState<AreaExpDataType>(InitialAreaExpData);
@@ -70,6 +70,10 @@ export const usePreferences = () => {
       Math.round(((exp_a_max + exp_b) * bonus) / 1.2),
     ]);
   }, [area, battle, expBonus]);
+
+  useEffect(() => {
+    setParentExp(exp);
+  }, [exp, setParentExp]);
 
   return {
     category,
