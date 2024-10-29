@@ -1,6 +1,6 @@
 "use client";
 
-import { ExpField, PreferenceField } from "./_components";
+import { ExpField, PreferenceField, ResultField } from "./_components";
 
 import { useExpCalculator } from "./hooks";
 
@@ -25,6 +25,12 @@ export default function ExpCalculatorPage() {
           setExp={(exp) => setTargetExp(exp)}
         />
         <PreferenceField label="周回設定" setExp={(exp) => setExp(exp)} />
+        <ResultField
+          label="計算結果"
+          current_exp={currentExp}
+          target_exp={targetExp}
+          exp={exp}
+        />
         <div className="mb-5 rounded-lg border p-2">
           <h2 className="text-xl">計算結果</h2>
           必要経験値
