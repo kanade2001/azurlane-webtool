@@ -141,7 +141,7 @@ export default function PreferenceField(props: PreferenceFieldProps) {
         <h3 className="text-xl">経験値ボーナス</h3>
         <div className="grid w-full grid-cols-[2fr_1fr] items-center gap-2 text-center">
           <div className="flex items-center justify-between">
-            <p>コンディション</p>{" "}
+            <p className="grow">コンディション</p>
             <ToggleButton
               id="condition_bonus_toggle"
               value={expBonus[0] > 0}
@@ -150,7 +150,7 @@ export default function PreferenceField(props: PreferenceFieldProps) {
           </div>
           <NumberInput id="condition_bonus" value={expBonus[0]} disabled />
           <div className="flex items-center justify-between">
-            <p>MVP</p>
+            <p className="grow">MVP</p>
             <ToggleButton
               id="mvp_bonus_toggle"
               value={expBonus[1] > 0}
@@ -159,7 +159,7 @@ export default function PreferenceField(props: PreferenceFieldProps) {
           </div>
           <NumberInput id="mvp_bonus" value={expBonus[1]} disabled />
           <div className="flex items-center justify-between">
-            <p>旗艦</p>
+            <p className="grow">旗艦</p>
             <ToggleButton
               id="flagship_bonus_toggle"
               value={expBonus[2] > 0}
@@ -168,7 +168,12 @@ export default function PreferenceField(props: PreferenceFieldProps) {
           </div>
           <NumberInput id="flagship_bonus" value={expBonus[2]} disabled />
           <div className="flex items-center justify-between">
-            <p>その他</p>
+            <p className="grow">その他</p>
+            <ToggleButton
+              id="flagship_bonus_toggle"
+              value={expBonus[3] > 0}
+              setValue={() => handleExpBonus(3, expBonus[3] > 0 ? 0 : 20)}
+            />
           </div>
           <NumberInput
             id="other_bonus"
