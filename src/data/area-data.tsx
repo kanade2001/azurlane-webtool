@@ -1,4 +1,4 @@
-export type ExpDataType = {
+export type AreaExpDataType = {
   id: string;
   label: string;
   exp: number[]; // [exp_s, exp_m, exp_l, exp_b]
@@ -6,14 +6,14 @@ export type ExpDataType = {
   num_battles_b?: number; // ボス戦の数
 };
 
-export const InitialExpData: ExpDataType = {
+export const InitialAreaExpData: AreaExpDataType = {
   id: "12-4",
   label: "12-4",
   exp: [921, 1024, 1106, 1347],
   num_battles: 6,
 };
 
-export const ExpData: ExpDataType[] = [
+export const AreaExpData: AreaExpDataType[] = [
   { id: "1-1", label: "1-1", exp: [96, 96, 96, 180], num_battles: 1 },
   { id: "1-2", label: "1-2", exp: [120, 132, 132, 204], num_battles: 2 },
   { id: "1-3", label: "1-3", exp: [132, 144, 144, 216], num_battles: 2 },

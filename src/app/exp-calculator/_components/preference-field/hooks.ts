@@ -2,12 +2,16 @@
 
 import { useState, useEffect } from "react";
 
-import { ExpData, ExpDataType, InitialExpData } from "@/data/exp-data";
+import {
+  AreaExpData,
+  AreaExpDataType,
+  InitialAreaExpData,
+} from "@/data/area-exp-data";
 
 export const usePreferences = () => {
   const [category, setCategory] = useState<string>("Normal");
   const [selected, setSelected] = useState<string>("12-4");
-  const [area, setArea] = useState<ExpDataType>(InitialExpData);
+  const [area, setArea] = useState<AreaExpDataType>(InitialAreaExpData);
   const [battle, setBattle] = useState<[boolean, boolean]>([true, false]);
   const [expBonus, setExpBonus] = useState<number[]>([20, 0, 0, 0]);
   const [exp, setExp] = useState<number[]>([0, 0]);
@@ -23,13 +27,15 @@ export const usePreferences = () => {
         num_battles_b: 1,
       });
     } else {
-      setArea(ExpData.find((data) => data.id === selected) || InitialExpData);
+      setArea(
+        AreaExpData.find((data) => data.id === selected) || InitialAreaExpData,
+      );
     }
   };
 
   const handleSelected = (area: string) => {
     setSelected(area);
-    setArea(ExpData.find((data) => data.id === area) || InitialExpData);
+    setArea(AreaExpData.find((data) => data.id === area) || InitialAreaExpData);
   };
 
   const handleCustomExp = (index: number, exp: number) => {

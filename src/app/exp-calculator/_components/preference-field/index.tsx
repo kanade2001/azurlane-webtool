@@ -4,7 +4,7 @@ import {
   SelectInput,
 } from "@/components/field";
 import { ToggleButton } from "@/components/button";
-import { ExpData } from "@/data/exp-data";
+import { AreaExpData } from "@/data/area-exp-data";
 import { usePreferences } from "./hooks";
 
 interface PreferenceFieldProps {
@@ -57,7 +57,7 @@ export default function PreferenceField(props: PreferenceFieldProps) {
             setValue={(area) => {
               handleSelected(area);
             }}
-            options={ExpData.map((data) => ({
+            options={AreaExpData.map((data) => ({
               value: data.id,
               label: data.label,
             }))}
