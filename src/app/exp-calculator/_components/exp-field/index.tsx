@@ -7,6 +7,7 @@ interface ExpFieldProps {
   id: string;
   label: string;
   defualtLevel: number;
+  setExp: (exp: number) => void;
 }
 
 export default function ExpField(props: ExpFieldProps) {
@@ -14,7 +15,7 @@ export default function ExpField(props: ExpFieldProps) {
     props.defualtLevel,
   );
 
-  const { total_exp } = calcExp(level, exp);
+  props.setExp(calcExp(level, exp));
 
   return (
     <div className="mb-5 rounded-lg border p-2">
@@ -57,7 +58,6 @@ export default function ExpField(props: ExpFieldProps) {
           ]}
         />
       </div>
-      <p>{total_exp}</p>
     </div>
   );
 }

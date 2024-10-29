@@ -9,6 +9,7 @@ import { usePreferences } from "./hooks";
 
 interface PreferenceFieldProps {
   label: string;
+  setExp: (exp: number[]) => void;
 }
 
 // 周回設定フィールド
@@ -27,6 +28,8 @@ export default function PreferenceField(props: PreferenceFieldProps) {
     setBattle,
     handleExpBonus,
   } = usePreferences();
+
+  props.setExp(exp);
 
   return (
     <div className="mb-5 rounded-lg border p-2">
