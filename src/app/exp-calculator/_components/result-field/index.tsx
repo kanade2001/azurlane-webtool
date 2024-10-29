@@ -9,7 +9,7 @@ interface ResultFieldPrps {
 
 export default function ResultField(props: ResultFieldPrps) {
   return (
-    <div className="mb-5 rounded-lg border p-2">
+    <div className="mb-5 rounded-lg border border-l border-gray-500 p-2">
       <h2 className="text-xl">{props.label}</h2>
       <div className="grid w-full grid-cols-2 items-center justify-center gap-2 text-center">
         <p>必要経験値</p>
