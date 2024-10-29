@@ -47,14 +47,6 @@ export const usePreferences = () => {
     }
   };
 
-  const handleSwitchBattle = (is_boss: boolean) => {
-    if (is_boss) {
-      setBattle([battle[0], !battle[1]]);
-    } else {
-      setBattle([!battle[0], battle[1]]);
-    }
-  };
-
   const handleExpBonus = (index: number, bonus: number) => {
     const newBonus = [...expBonus];
     newBonus[index] = bonus;
@@ -80,11 +72,12 @@ export const usePreferences = () => {
     battle,
     expBonus,
     exp,
+
     handleCategory,
     handleSelected,
     handleCustomExp,
     handleCustomBattle,
-    handleSwitchBattle,
+    setBattle,
     handleExpBonus,
   };
 };
