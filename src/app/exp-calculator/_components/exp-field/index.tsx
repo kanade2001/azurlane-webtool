@@ -1,6 +1,7 @@
 import { NumberInputWithButton, SlideInput } from "@/components/field";
 import { LineButton } from "@/components/button";
 import { useExp } from "./hooks";
+import { calcExp } from "./utils";
 
 interface ExpFieldProps {
   id: string;
@@ -12,6 +13,8 @@ export default function ExpField(props: ExpFieldProps) {
   const { level, exp, maxExp, handleLevel, setExp } = useExp(
     props.defualtLevel,
   );
+
+  const { total_exp } = calcExp(level, exp);
 
   return (
     <div className="mb-5 rounded-lg border p-2">
@@ -54,6 +57,7 @@ export default function ExpField(props: ExpFieldProps) {
           ]}
         />
       </div>
+      <p>{total_exp}</p>
     </div>
   );
 }
