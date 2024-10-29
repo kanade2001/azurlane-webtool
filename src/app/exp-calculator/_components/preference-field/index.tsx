@@ -6,7 +6,7 @@ import {
   SelectInput,
 } from "@/components/field";
 import { ToggleButton } from "@/components/button";
-import { ExpData, ExpDataType, InitialExpData } from "../_data/exp-data";
+import { ExpData, ExpDataType, InitialExpData } from "../../../../data/exp-data";
 
 interface PreferenceFieldProps {
   label: string;
