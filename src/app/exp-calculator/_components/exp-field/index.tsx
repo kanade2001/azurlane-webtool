@@ -3,6 +3,8 @@ import { LineButton } from "@/components/button";
 import { useExp } from "./hooks";
 import { calcExp } from "./utils";
 
+import { useEffect } from "react";
+
 interface ExpFieldProps {
   id: string;
   label: string;
@@ -15,7 +17,9 @@ export default function ExpField(props: ExpFieldProps) {
     props.defualtLevel,
   );
 
-  props.setExp(calcExp(level, exp));
+  useEffect(() => {
+    props.setExp(calcExp(level, exp));
+  }, [level, exp, props, props.setExp]);
 
   return (
     <div className="mb-5 rounded-lg border border-l border-gray-500 p-2">

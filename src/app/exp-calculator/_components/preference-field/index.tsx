@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import {
   NumberInput,
   NumberInputWithButton,
@@ -27,7 +29,11 @@ export default function PreferenceField(props: PreferenceFieldProps) {
     handleCustomBattle,
     setBattle,
     handleExpBonus,
-  } = usePreferences(props.setExp);
+  } = usePreferences();
+
+  useEffect(() => {
+    props.setExp(exp);
+  }, [exp, props]);
 
   return (
     <div className="mb-5 rounded-lg border border-l border-gray-500 p-2">
