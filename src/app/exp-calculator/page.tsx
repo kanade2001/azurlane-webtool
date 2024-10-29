@@ -11,9 +11,6 @@ export default function ExpCalculatorPage() {
         <ExpField id="target_exp" label="目標経験値" defualtLevel={120} />
         <PreferenceField label="周回設定" />
         <div className="mb-5 rounded-lg border p-2">
-          <h2 className="text-xl">周回設定</h2>
-        </div>
-        <div className="mb-5 rounded-lg border p-2">
           <h2 className="text-xl">計算結果</h2>
         </div>
       </div>
