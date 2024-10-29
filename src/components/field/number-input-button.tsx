@@ -7,6 +7,8 @@ interface NumberInputWithButtonProps {
 }
 
 const NumberInputWithButton = (props: NumberInputWithButtonProps) => {
+  const value = isNaN(props.value) ? 0 : props.value;
+
   return (
     <div className="w-full">
       <div
@@ -17,7 +19,7 @@ const NumberInputWithButton = (props: NumberInputWithButtonProps) => {
           id="decrement-button"
           data-input-counter-decrement="quantity-input"
           className="h-11 rounded-s-lg border border-gray-300 bg-gray-100 p-3 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700"
-          onClick={() => props.setValue(props.value - 1)}
+          onClick={() => props.setValue(value - 1)}
         >
           <svg
             className="h-3 w-3 text-gray-900 dark:text-white"
@@ -44,7 +46,7 @@ const NumberInputWithButton = (props: NumberInputWithButtonProps) => {
           placeholder="120"
           required
           disabled={props.disabled}
-          value={props.value}
+          value={value}
           onChange={(e) => props.setValue(+e.target.value)}
         />
         <button
@@ -52,7 +54,7 @@ const NumberInputWithButton = (props: NumberInputWithButtonProps) => {
           id="increment-button"
           data-input-counter-increment="quantity-input"
           className="h-11 rounded-e-lg border border-gray-300 bg-gray-100 p-3 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700"
-          onClick={() => props.setValue(props.value + 1)}
+          onClick={() => props.setValue(value + 1)}
         >
           <svg
             className="h-3 w-3 text-gray-900 dark:text-white"
