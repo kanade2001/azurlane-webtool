@@ -4,7 +4,7 @@ import {
   SelectInput,
 } from "@/components/field";
 import { ToggleButton } from "@/components/button";
-import { ExpData } from "../../../../data/exp-data";
+import { ExpData } from "@/data/exp-data";
 import { usePreferences } from "./hooks";
 
 interface PreferenceFieldProps {
