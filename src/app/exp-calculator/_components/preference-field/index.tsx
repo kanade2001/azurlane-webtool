@@ -82,33 +82,13 @@ export default function PreferenceField(props: PreferenceFieldProps) {
         ) : (
           <div className="grid w-full grid-cols-4 items-center gap-2 text-center">
             <p>小型</p>
-            <NumberInput
-              id="exp-s"
-              value={area.exp[0]}
-              setValue={() => {}}
-              disabled
-            />
+            <NumberInput id="exp-s" value={area.exp[0]} disabled />
             <p>中型</p>
-            <NumberInput
-              id="exp-m"
-              value={area.exp[1]}
-              setValue={() => {}}
-              disabled
-            />
+            <NumberInput id="exp-m" value={area.exp[1]} disabled />
             <p>大型</p>
-            <NumberInput
-              id="exp-l"
-              value={area.exp[2]}
-              setValue={() => {}}
-              disabled
-            />
+            <NumberInput id="exp-l" value={area.exp[2]} disabled />
             <p>ボス</p>
-            <NumberInput
-              id="exp-b"
-              value={area.exp[3]}
-              setValue={() => {}}
-              disabled
-            />
+            <NumberInput id="exp-b" value={area.exp[3]} disabled />
           </div>
         )}
 
@@ -129,12 +109,7 @@ export default function PreferenceField(props: PreferenceFieldProps) {
               disabled={true}
             />
           ) : (
-            <NumberInput
-              id="num_battles"
-              value={area.num_battles}
-              setValue={() => {}}
-              disabled
-            />
+            <NumberInput id="num_battles" value={area.num_battles} disabled />
           )}
           <div className="flex items-center justify-between">
             <p className="grow">ボス</p>
@@ -155,7 +130,6 @@ export default function PreferenceField(props: PreferenceFieldProps) {
             <NumberInput
               id="num_battles_b"
               value={area.num_battles_b || 1}
-              setValue={() => {}}
               disabled
             />
           )}
