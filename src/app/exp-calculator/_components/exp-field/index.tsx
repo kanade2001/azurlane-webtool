@@ -1,16 +1,22 @@
 import { NumberInputWithButton, SlideInput } from "@/components/field";
 import { LineButton } from "@/components/button";
+import { useExp } from "./hooks";
+import { calcExp } from "./utils";
 
 interface ExpFieldProps {
+  id: string;
   label: string;
-  level: number;
-  setLevel: (level: number) => void;
-  exp: number;
+  defualtLevel: number;
   setExp: (exp: number) => void;
-  max_exp: number;
 }
 
 export default function ExpField(props: ExpFieldProps) {
+  const { level, exp, maxExp, handleLevel, setExp } = useExp(
+    props.defualtLevel,
+  );
+
+  props.setExp(calcExp(level, exp));
+
   return (
     <div className="mb-5 rounded-lg border p-2">
       <h2 className="text-xl">{props.label}</h2>
@@ -19,36 +25,36 @@ export default function ExpField(props: ExpFieldProps) {
         <NumberInputWithButton
           id="level"
           max_width="full"
-          value={props.level}
-          setValue={(value) => props.setLevel(value)}
+          value={level}
+          setValue={(value) => handleLevel(value)}
         />
         <LineButton
           buttons={[
-            { label: "100", onClick: () => props.setLevel(100) },
-            { label: "110", onClick: () => props.setLevel(110) },
-            { label: "120", onClick: () => props.setLevel(120) },
-            { label: "125", onClick: () => props.setLevel(125) },
+            { label: "100", onClick: () => handleLevel(100) },
+            { label: "110", onClick: () => handleLevel(110) },
+            { label: "120", onClick: () => handleLevel(120) },
+            { label: "125", onClick: () => handleLevel(125) },
           ]}
         />
         <h3 className="text-xl">Exp</h3>
         <NumberInputWithButton
           id="exp"
           max_width="full"
-          value={props.exp}
-          setValue={(value) => props.setExp(value)}
+          value={exp}
+          setValue={(value) => setExp(value)}
         />
         <SlideInput
-          value={props.exp}
-          onChange={(exp) => props.setExp(exp)}
+          value={exp}
+          onChange={(exp) => setExp(exp)}
           min_value={0}
-          max_value={props.max_exp}
+          max_value={maxExp}
           show_label
         />
         <LineButton
           buttons={[
-            { label: "0", onClick: () => props.setExp(0) },
-            { label: "1450K", onClick: () => props.setExp(1450000) },
-            { label: "3000K", onClick: () => props.setExp(3000000) },
+            { label: "0", onClick: () => setExp(0) },
+            { label: "1450K", onClick: () => setExp(1450000) },
+            { label: "3000K", onClick: () => setExp(3000000) },
           ]}
         />
       </div>
