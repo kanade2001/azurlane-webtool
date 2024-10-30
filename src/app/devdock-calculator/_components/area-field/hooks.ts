@@ -8,20 +8,37 @@ import {
   InitialAreaExpData,
 } from "@/data/area-exp-data";
 
+type FleetType = {
+  formation: number[];
+  conditionBonus: string;
+  mvpBonus: string;
+  otherBonus: number;
+};
+
 export const usePreferences = () => {
   const [category, setCategory] = useState<string>("Normal");
   const [selected, setSelected] = useState<string>("12-4");
   const [area, setArea] = useState<AreaExpDataType>(InitialAreaExpData);
+  const [fleet, setFleet] = useState<FleetType[]>([
+    {
+      formation: [0, 0, 0, 0, 0, 0],
+      conditionBonus: "1",
+      mvpBonus: "0",
+      otherBonus: 0,
+    },
+    {
+      formation: [0, 0, 0, 0, 0, 0],
+      conditionBonus: "1",
+      mvpBonus: "0",
+      otherBonus: 0,
+    },
+  ]);
 
   const [formation, setFormation] = useState<number[][]>([
     [0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0],
   ]);
 
-  const [expBonus, setExpBonus] = useState<number[]>([20, 0, 0, 0]);
-  const [conditionBonus, setConditionBonus] = useState<string[]>(["1", "1"]);
-  const [mvpBonus, setMvpBonus] = useState<string[]>(["0", "0"]);
-  const [otherBonus, setOtherBonus] = useState<number[]>([0, 0]);
   const [exp, setExp] = useState<number[]>([0, 0]);
 
   const handleCategory = (category: string) => {
@@ -61,45 +78,36 @@ export const usePreferences = () => {
     }
   };
 
+  const handleFleet = (fleet_index: number, new_fleet: FleetType) => {
+    const newFleet = [...fleet];
+    newFleet[fleet_index] = new_fleet;
+    setFleet(newFleet);
+  };
+
   const handleFormation = (
-    is_Boss: boolean = false,
+    fleet_index: number,
     index: number,
     value: number,
   ) => {
-    const newFormation = [...formation];
-    newFormation[is_Boss ? 1 : 0][index] = value;
-    setFormation(newFormation);
+    const newFormation = [...fleet[fleet_index].formation];
+    newFormation[index] = value;
+    handleFleet(fleet_index, {
+      ...fleet[fleet_index],
+      formation: newFormation,
+    });
   };
-
-  useEffect(() => {
-    const exp_a_min = area.exp[0] * area.num_battles; // 道中の最小経験値
-    const exp_a_max = area.exp[2] * area.num_battles; // 道中の最大経験値
-    const exp_b = area.exp[3] * (area.num_battles_b || 1); // ボスの経験値
-    const bonus = expBonus.reduce((acc, cur) => (acc * (cur + 100)) / 100, 1.0);
-
-    setExp([
-      Math.round(((exp_a_min + exp_b) * bonus) / 1.2),
-      Math.round(((exp_a_max + exp_b) * bonus) / 1.2),
-    ]);
-  }, [area, expBonus]);
 
   return {
     category,
     selected,
     area,
-    formation,
-    conditionBonus,
-    mvpBonus,
-    otherBonus,
-    exp,
+    fleet,
 
     handleCategory,
     handleSelected,
     handleCustomExp,
     handleCustomBattle,
+    handleFleet,
     handleFormation,
-    setConditionBonus,
-    setMvpBonus,
-    setOtherBonus,
   };
 };
