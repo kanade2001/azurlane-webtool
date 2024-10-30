@@ -221,9 +221,6 @@ export default function AreaField(props: AreaFieldProps) {
           </>
         ))}
       </div>
-      {exp[0]}
-      <br />
-      {exp[1]}
     </div>
   );
 }
