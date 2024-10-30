@@ -1,7 +1,7 @@
 "use client";
 
 import { Header, Footer } from "@/components/ui";
-import { PreferenceField, AreaField } from "./_components";
+import { PreferenceField, AreaField, ResultField } from "./_components";
 
 export default function DevDockCalculatorPage() {
   return (
@@ -11,6 +11,7 @@ export default function DevDockCalculatorPage() {
         <h1 className="my-10 text-4xl">開発ドック計算機</h1>
         <PreferenceField />
         <AreaField />
+        <ResultField count={[]} />
       </div>
       <Footer />
     </div>
