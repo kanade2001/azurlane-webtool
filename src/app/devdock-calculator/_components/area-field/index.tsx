@@ -14,15 +14,18 @@ export default function AreaField() {
     category,
     selected,
     area,
-    battle,
     expBonus,
-    exp,
-    handleCategory,
-    handleSelected,
-    handleCustomExp,
-    handleCustomBattle,
-    setBattle,
+    conditionBonus,
+    mvpBonus,
+    otherBonus,
+    handleCategory, // ノーマル or カスタム
+    handleSelected, // 海域選択
+    handleCustomExp, // カスタムの経験値
+    handleCustomBattle, // カスタムの戦闘回数
     handleExpBonus,
+    setConditionBonus,
+    setMvpBonus,
+    setOtherBonus,
   } = usePreferences();
 
   return (
@@ -94,7 +97,7 @@ export default function AreaField() {
         <>
           <div className="flex w-full flex-col gap-2">
             <div className="grid w-full grid-cols-2 items-center gap-2 text-center">
-              <p>道中戦闘</p>
+              <p>戦闘数</p>
               {category === "Custom" ? (
                 <NumberInputWithButton
                   id="num_battles_custom"
@@ -155,41 +158,58 @@ export default function AreaField() {
                 <p className="grow">コンディション</p>
                 <ToggleButton
                   id="condition_bonus_toggle"
-                  value={expBonus[0] > 0}
-                  setValue={() => handleExpBonus(0, expBonus[0] > 0 ? 0 : 20)}
+                  value={conditionBonus[0]}
+                  setValue={() =>
+                    setConditionBonus([!conditionBonus[0], conditionBonus[1]])
+                  }
                 />
               </div>
               <NumberInput id="condition_bonus" value={expBonus[0]} disabled />
               <div className="flex items-center justify-between">
                 <p className="grow">MVP</p>
                 <ToggleButton
-                  id="mvp_bonus_toggle"
-                  value={expBonus[1] > 0}
-                  setValue={() => handleExpBonus(1, expBonus[1] > 0 ? 0 : 100)}
+                  id="condition_bonus_toggle"
+                  value={+mvpBonus[0] > 0}
+                  setValue={() =>
+                    setMvpBonus([+mvpBonus[0] > 0 ? "0" : "1", mvpBonus[1]])
+                  }
                 />
               </div>
-              <NumberInput id="mvp_bonus" value={expBonus[1]} disabled />
+              <SelectInput
+                id="mvp_b"
+                value={mvpBonus[0]}
+                setValue={(_b) => {
+                  setMvpBonus([_b, mvpBonus[1]]);
+                }}
+                options={[
+                  {
+                    value: "0",
+                    label: "なし",
+                  },
+                  {
+                    value: "1",
+                    label: "前衛/僚艦",
+                  },
+                  {
+                    value: "1.5",
+                    label: "旗艦",
+                  },
+                ]}
+              />
               <div className="flex items-center justify-between">
-                <p className="grow">旗艦</p>
+                <p className="grow">その他(累計)</p>
                 <ToggleButton
-                  id="flagship_bonus_toggle"
-                  value={expBonus[2] > 0}
-                  setValue={() => handleExpBonus(2, expBonus[2] > 0 ? 0 : 50)}
-                />
-              </div>
-              <NumberInput id="flagship_bonus" value={expBonus[2]} disabled />
-              <div className="flex items-center justify-between">
-                <p className="grow">その他</p>
-                <ToggleButton
-                  id="flagship_bonus_toggle"
-                  value={expBonus[3] > 0}
-                  setValue={() => handleExpBonus(3, expBonus[3] > 0 ? 0 : 20)}
+                  id="condition_bonus_toggle"
+                  value={otherBonus[0] > 0}
+                  setValue={() =>
+                    setOtherBonus([otherBonus[0] > 0 ? 0 : 20, otherBonus[1]])
+                  }
                 />
               </div>
               <NumberInput
-                id="other_bonus"
-                value={expBonus[3]}
-                setValue={(value) => handleExpBonus(3, value)}
+                id="condition_bonus"
+                value={otherBonus[0]}
+                setValue={(bonus) => setOtherBonus([bonus, otherBonus[1]])}
               />
             </div>
           </div>
@@ -197,7 +217,7 @@ export default function AreaField() {
         <h3 className="text-xl">中枢戦闘編成</h3>
         <>
           <div className="grid w-full grid-cols-2 items-center gap-2 text-center">
-            <p>中枢戦闘</p>
+            <p>戦闘数</p>
             {category === "Custom" ? (
               <NumberInputWithButton
                 id="num_battles_custom_b"
@@ -258,41 +278,58 @@ export default function AreaField() {
               <p className="grow">コンディション</p>
               <ToggleButton
                 id="condition_bonus_toggle"
-                value={expBonus[0] > 0}
-                setValue={() => handleExpBonus(0, expBonus[0] > 0 ? 0 : 20)}
+                value={conditionBonus[1]}
+                setValue={() =>
+                  setConditionBonus([conditionBonus[0], !conditionBonus[1]])
+                }
               />
             </div>
             <NumberInput id="condition_bonus" value={expBonus[0]} disabled />
             <div className="flex items-center justify-between">
               <p className="grow">MVP</p>
               <ToggleButton
-                id="mvp_bonus_toggle"
-                value={expBonus[1] > 0}
-                setValue={() => handleExpBonus(1, expBonus[1] > 0 ? 0 : 100)}
+                id="condition_bonus_toggle"
+                value={+mvpBonus[1] > 0}
+                setValue={() =>
+                  setMvpBonus([mvpBonus[0], +mvpBonus[1] > 0 ? "0" : "1"])
+                }
               />
             </div>
-            <NumberInput id="mvp_bonus" value={expBonus[1]} disabled />
+            <SelectInput
+              id="mvp_b"
+              value={mvpBonus[1]}
+              setValue={(_b) => {
+                setMvpBonus([mvpBonus[0], _b]);
+              }}
+              options={[
+                {
+                  value: "0",
+                  label: "なし",
+                },
+                {
+                  value: "1",
+                  label: "前衛/僚艦",
+                },
+                {
+                  value: "1.5",
+                  label: "旗艦",
+                },
+              ]}
+            />
             <div className="flex items-center justify-between">
-              <p className="grow">旗艦</p>
+              <p className="grow">その他(累計)</p>
               <ToggleButton
-                id="flagship_bonus_toggle"
-                value={expBonus[2] > 0}
-                setValue={() => handleExpBonus(2, expBonus[2] > 0 ? 0 : 50)}
-              />
-            </div>
-            <NumberInput id="flagship_bonus" value={expBonus[2]} disabled />
-            <div className="flex items-center justify-between">
-              <p className="grow">その他</p>
-              <ToggleButton
-                id="flagship_bonus_toggle"
-                value={expBonus[3] > 0}
-                setValue={() => handleExpBonus(3, expBonus[3] > 0 ? 0 : 20)}
+                id="condition_bonus_toggle"
+                value={otherBonus[1] > 0}
+                setValue={() =>
+                  setOtherBonus([otherBonus[0], otherBonus[1] > 0 ? 0 : 20])
+                }
               />
             </div>
             <NumberInput
-              id="other_bonus"
-              value={expBonus[3]}
-              setValue={(value) => handleExpBonus(3, value)}
+              id="condition_bonus"
+              value={otherBonus[1]}
+              setValue={(bonus) => setOtherBonus([otherBonus[0], bonus])}
             />
           </div>
         </>

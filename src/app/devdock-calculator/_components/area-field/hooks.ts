@@ -12,8 +12,14 @@ export const usePreferences = () => {
   const [category, setCategory] = useState<string>("Normal");
   const [selected, setSelected] = useState<string>("12-4");
   const [area, setArea] = useState<AreaExpDataType>(InitialAreaExpData);
-  const [battle, setBattle] = useState<[boolean, boolean]>([true, false]);
+
   const [expBonus, setExpBonus] = useState<number[]>([20, 0, 0, 0]);
+  const [conditionBonus, setConditionBonus] = useState<boolean[]>([
+    false,
+    false,
+  ]);
+  const [mvpBonus, setMvpBonus] = useState<string[]>(["0", "0"]);
+  const [otherBonus, setOtherBonus] = useState<number[]>([0, 0]);
   const [exp, setExp] = useState<number[]>([0, 0]);
 
   const handleCategory = (category: string) => {
@@ -60,30 +66,34 @@ export const usePreferences = () => {
   };
 
   useEffect(() => {
-    const exp_a_min = area.exp[0] * area.num_battles * (battle[0] ? 1 : 0); // 道中の最小経験値
-    const exp_a_max = area.exp[2] * area.num_battles * (battle[0] ? 1 : 0); // 道中の最大経験値
-    const exp_b = area.exp[3] * (area.num_battles_b || 1) * (battle[1] ? 1 : 0); // ボスの経験値
+    const exp_a_min = area.exp[0] * area.num_battles; // 道中の最小経験値
+    const exp_a_max = area.exp[2] * area.num_battles; // 道中の最大経験値
+    const exp_b = area.exp[3] * (area.num_battles_b || 1); // ボスの経験値
     const bonus = expBonus.reduce((acc, cur) => (acc * (cur + 100)) / 100, 1.0);
 
     setExp([
       Math.round(((exp_a_min + exp_b) * bonus) / 1.2),
       Math.round(((exp_a_max + exp_b) * bonus) / 1.2),
     ]);
-  }, [area, battle, expBonus]);
+  }, [area, expBonus]);
 
   return {
     category,
     selected,
     area,
-    battle,
     expBonus,
+    conditionBonus,
+    mvpBonus,
+    otherBonus,
     exp,
 
     handleCategory,
     handleSelected,
     handleCustomExp,
     handleCustomBattle,
-    setBattle,
     handleExpBonus,
+    setConditionBonus,
+    setMvpBonus,
+    setOtherBonus,
   };
 };
