@@ -23,7 +23,7 @@ const PreferenceField = (props: PreferenceFieldProps) => {
       ((100 - progress) * totalExp) / 100,
     ]);
     props.setTargetExp(((100 - progress) * totalExp) / 100);
-  }, [exp, stage, isDR, progress, props]);
+  }, [stage, isDR, progress, props]);
   return (
     <div className="mb-5 flex flex-col gap-4 rounded-lg border border-l border-gray-500 p-2">
       <h2 className="text-xl">設定</h2>
