@@ -1,17 +1,19 @@
-import { ToggleButton, OnOffButton } from "@/components/button";
-import React from "react";
+import { OnOffButton } from "@/components/button";
+import React, { useEffect } from "react";
 import {
   NumberInput,
   SelectInput,
   NumberInputWithButton,
 } from "@/components/field";
+import { AreaExpData } from "@/data/area-exp-data";
 
 import { usePreferences } from "./hooks";
 
-import { AreaExpData } from "@/data/area-exp-data";
-import { format } from "path";
+interface AreaFieldProps {
+  setObtainedExp: (exp: number[]) => void;
+}
 
-export default function AreaField() {
+export default function AreaField(props: AreaFieldProps) {
   const {
     category,
     selected,
@@ -33,6 +35,10 @@ export default function AreaField() {
     { label: "主力", buttons: ["僚艦", "旗艦", "僚艦"] },
     { label: "前衛", buttons: ["前衛", "前衛", "前衛"] },
   ];
+
+  useEffect(() => {
+    props.setObtainedExp(exp);
+  }, [exp]);
 
   return (
     <div className="mb-5 flex flex-col gap-4 rounded-lg border border-l border-gray-500 p-2">

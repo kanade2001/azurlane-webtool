@@ -6,7 +6,11 @@ import { ToggleButton } from "@/components/button";
 import { NumberInput, SelectInput, SlideInput } from "@/components/field";
 import { usePreferences } from "./hooks";
 
-const PreferenceField = () => {
+interface PreferenceFieldProps {
+  setTargetExp: (exp: number) => void;
+}
+
+const PreferenceField = (props: PreferenceFieldProps) => {
   const [exp, setExp] = useState<number[]>([0, 0, 0]); //total, current, remaining
   const { stage, isDR, progress, setStage, setIsDR, setProgress } =
     usePreferences();
@@ -18,6 +22,7 @@ const PreferenceField = () => {
       (progress * totalExp) / 100,
       ((100 - progress) * totalExp) / 100,
     ]);
+    props.setTargetExp(((100 - progress) * totalExp) / 100);
   }, [exp, stage, isDR, progress]);
   return (
     <div className="mb-5 flex flex-col gap-4 rounded-lg border border-l border-gray-500 p-2">
