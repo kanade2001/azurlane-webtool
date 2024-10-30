@@ -17,6 +17,8 @@ export default function AreaField() {
     selected,
     area,
     fleet,
+    coefficient,
+    exp,
 
     handleCategory, // ノーマル or カスタム
     handleSelected, // 海域選択
@@ -116,6 +118,12 @@ export default function AreaField() {
                   disabled
                 />
               )}
+              <p>加算係数</p>
+              <NumberInput
+                id={`coefficient-${index}`}
+                value={coefficient[index]}
+                disabled
+              />
             </div>
             <div className="grid w-full grid-cols-4 items-center gap-2 text-center">
               {formLabel.map((group, groupIndex) => (

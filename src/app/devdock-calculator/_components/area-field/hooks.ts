@@ -34,11 +34,7 @@ export const usePreferences = () => {
     },
   ]);
 
-  const [formation, setFormation] = useState<number[][]>([
-    [0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0],
-  ]);
-
+  const [coefficient, setCoefficient] = useState<number[]>([0, 0]);
   const [exp, setExp] = useState<number[]>([0, 0]);
 
   const handleCategory = (category: string) => {
@@ -97,11 +93,52 @@ export const usePreferences = () => {
     });
   };
 
+  useEffect(() => {
+    const exp_a_coefficient =
+      fleet[0].formation.reduce((acc, cur) => acc + cur, 0) +
+      +fleet[0].mvpBonus +
+      fleet[0].otherBonus / 100;
+    const exp_b_coefficient =
+      fleet[1].formation.reduce((acc, cur) => acc + cur, 0) +
+      +fleet[1].mvpBonus +
+      fleet[1].otherBonus / 100;
+
+    setCoefficient([exp_a_coefficient, exp_b_coefficient]);
+  });
+
+  useEffect(() => {
+    const exp_a_coefficient =
+      fleet[0].formation.reduce((acc, cur) => acc + cur, 0) +
+      +fleet[0].mvpBonus +
+      fleet[0].otherBonus / 100;
+    const exp_b_coefficient =
+      fleet[1].formation.reduce((acc, cur) => acc + cur, 0) +
+      +fleet[1].mvpBonus +
+      fleet[1].otherBonus / 100;
+
+    const exp_a_min = Math.round(
+      (area.exp[0] * area.num_battles * exp_a_coefficient) /
+        (fleet[0].conditionBonus === "0" ? 1.2 : 1),
+    );
+    const exp_a_max = Math.round(
+      (area.exp[2] * area.num_battles * exp_a_coefficient) /
+        (fleet[0].conditionBonus === "0" ? 1.2 : 1),
+    );
+    const exp_b = Math.round(
+      (area.exp[3] * (area.num_battles_b || 1) * exp_b_coefficient) /
+        (fleet[1].conditionBonus === "0" ? 1.2 : 1),
+    );
+
+    setExp([exp_a_min + exp_b, exp_a_max, exp_b]);
+  }, [area, fleet]);
+
   return {
     category,
     selected,
     area,
     fleet,
+    coefficient,
+    exp,
 
     handleCategory,
     handleSelected,
