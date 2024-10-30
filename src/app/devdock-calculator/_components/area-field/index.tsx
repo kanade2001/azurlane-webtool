@@ -112,15 +112,17 @@ export default function AreaField(props: AreaFieldProps) {
               <p>戦闘数</p>
               {category === "Custom" ? (
                 <NumberInputWithButton
-                  id="num_battles_custom_b"
-                  value={area.num_battles_b!}
-                  setValue={(num) => handleCustomBattle(1, num)}
+                  id={`num_battles-${index}-custom`}
+                  value={index === 0 ? area.num_battles : area.num_battles_b!}
+                  setValue={(num) => handleCustomBattle(index, num)}
                   disabled={true}
                 />
               ) : (
                 <NumberInput
-                  id="num_battles_b"
-                  value={area.num_battles_b || 1}
+                  id={`num_battles-${index}`}
+                  value={
+                    index === 0 ? area.num_battles : area.num_battles_b || 1
+                  }
                   disabled
                 />
               )}
@@ -219,6 +221,9 @@ export default function AreaField(props: AreaFieldProps) {
           </>
         ))}
       </div>
+      {exp[0]}
+      <br />
+      {exp[1]}
     </div>
   );
 }
