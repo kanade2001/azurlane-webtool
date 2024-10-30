@@ -38,7 +38,7 @@ export default function AreaField(props: AreaFieldProps) {
 
   useEffect(() => {
     props.setObtainedExp(exp);
-  }, [exp]);
+  }, [exp, props]);
 
   return (
     <div className="mb-5 flex flex-col gap-4 rounded-lg border border-l border-gray-500 p-2">

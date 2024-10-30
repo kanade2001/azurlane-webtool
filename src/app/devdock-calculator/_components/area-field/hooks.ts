@@ -104,7 +104,7 @@ export const usePreferences = () => {
       fleet[1].otherBonus / 100;
 
     setCoefficient([exp_a_coefficient, exp_b_coefficient]);
-  });
+  }, [fleet, setCoefficient]);
 
   useEffect(() => {
     const exp_a_coefficient =
