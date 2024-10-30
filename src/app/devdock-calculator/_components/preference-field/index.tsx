@@ -20,7 +20,7 @@ const PreferenceField = () => {
     ]);
   }, [exp, stage, isDR, progress]);
   return (
-    <div className="mb-5 rounded-lg border border-l border-gray-500 p-2">
+    <div className="mb-5 flex flex-col gap-4 rounded-lg border border-l border-gray-500 p-2">
       <h2 className="text-xl">設定</h2>
       <div className="flex w-full flex-col items-center justify-center gap-2">
         <div className="flex w-full items-center justify-between gap-2">
