@@ -1,5 +1,7 @@
+"use client";
+
 import { Header, Footer } from "@/components/ui";
-import { PreferenceField } from "./_components";
+import { PreferenceField, AreaField } from "./_components";
 
 export default function DevDockCalculatorPage() {
   return (
@@ -7,6 +9,7 @@ export default function DevDockCalculatorPage() {
       <Header />
       <div className="flex w-full max-w-lg grow flex-col">
         <PreferenceField />
+        <AreaField />
       </div>
       <Footer />
     </div>
