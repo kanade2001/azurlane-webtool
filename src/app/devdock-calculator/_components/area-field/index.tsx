@@ -8,13 +8,14 @@ import {
 import { usePreferences } from "./hooks";
 
 import { AreaExpData } from "@/data/area-exp-data";
+import { format } from "path";
 
 export default function AreaField() {
   const {
     category,
     selected,
     area,
-    expBonus,
+    formation,
     conditionBonus,
     mvpBonus,
     otherBonus,
@@ -22,10 +23,10 @@ export default function AreaField() {
     handleSelected, // 海域選択
     handleCustomExp, // カスタムの経験値
     handleCustomBattle, // カスタムの戦闘回数
-    handleExpBonus,
-    setConditionBonus,
-    setMvpBonus,
-    setOtherBonus,
+    handleFormation, // 編成
+    setConditionBonus, // コンディションボーナス
+    setMvpBonus, // MVPボーナス
+    setOtherBonus, // その他ボーナス
   } = usePreferences();
 
   return (
@@ -118,63 +119,73 @@ export default function AreaField() {
               <OnOffButton
                 id="m1"
                 label="僚艦"
-                value={false}
-                onChange={() => {}}
+                value={formation[0][0] > 0}
+                onClick={() => {
+                  handleFormation(false, 0, formation[0][0] > 0 ? 0 : 1);
+                }}
               />
               <OnOffButton
                 id="m2"
                 label="旗艦"
-                value={false}
-                onChange={() => {}}
+                value={formation[0][1] > 0}
+                onClick={() => {
+                  handleFormation(false, 1, formation[0][1] > 0 ? 0 : 1.5);
+                }}
               />
               <OnOffButton
                 id="m3"
                 label="僚艦"
-                value={false}
-                onChange={() => {}}
+                value={formation[0][2] > 0}
+                onClick={() => {
+                  handleFormation(false, 2, formation[0][2] > 0 ? 0 : 1);
+                }}
               />
               <p>前衛</p>
               <OnOffButton
                 id="v1"
                 label="前衛"
-                value={false}
-                onChange={() => {}}
+                value={formation[0][3] > 0}
+                onClick={() => {
+                  handleFormation(false, 3, formation[0][3] > 0 ? 0 : 1);
+                }}
               />
               <OnOffButton
                 id="v2"
                 label="前衛"
-                value={false}
-                onChange={() => {}}
+                value={formation[0][4] > 0}
+                onClick={() => {
+                  handleFormation(false, 4, formation[0][4] > 0 ? 0 : 1);
+                }}
               />
               <OnOffButton
                 id="v3"
                 label="前衛"
-                value={false}
-                onChange={() => {}}
+                value={formation[0][5] > 0}
+                onClick={() => {
+                  handleFormation(false, 5, formation[0][5] > 0 ? 0 : 1);
+                }}
               />
             </div>
             <div className="grid w-full grid-cols-[2fr_1fr] items-center gap-2 text-center">
-              <div className="flex items-center justify-between">
-                <p className="grow">コンディション</p>
-                <ToggleButton
-                  id="condition_bonus_toggle"
-                  value={conditionBonus[0]}
-                  setValue={() =>
-                    setConditionBonus([!conditionBonus[0], conditionBonus[1]])
-                  }
-                />
-              </div>
-              <NumberInput id="condition_bonus" value={expBonus[0]} disabled />
-              <div className="flex items-center justify-between">
-                <p className="grow">MVP</p>
-                <ToggleButton
-                  id="condition_bonus_toggle"
-                  value={+mvpBonus[0] > 0}
-                  setValue={() =>
-                    setMvpBonus([+mvpBonus[0] > 0 ? "0" : "1", mvpBonus[1]])
-                  }
-                />
-              </div>
+              <p>コンディション</p>
+              <SelectInput
+                id="condition_bonus"
+                value={conditionBonus[0]}
+                setValue={(bonus) =>
+                  setConditionBonus([bonus, conditionBonus[1]])
+                }
+                options={[
+                  {
+                    value: "0",
+                    label: "なし",
+                  },
+                  {
+                    value: "1",
+                    label: "20%",
+                  },
+                ]}
+              />
+              <p>MVP</p>
               <SelectInput
                 id="mvp_b"
                 value={mvpBonus[0]}
@@ -196,16 +207,7 @@ export default function AreaField() {
                   },
                 ]}
               />
-              <div className="flex items-center justify-between">
-                <p className="grow">その他(累計)</p>
-                <ToggleButton
-                  id="condition_bonus_toggle"
-                  value={otherBonus[0] > 0}
-                  setValue={() =>
-                    setOtherBonus([otherBonus[0] > 0 ? 0 : 20, otherBonus[1]])
-                  }
-                />
-              </div>
+              <p>その他(累計)</p>
               <NumberInput
                 id="condition_bonus"
                 value={otherBonus[0]}
@@ -238,63 +240,73 @@ export default function AreaField() {
             <OnOffButton
               id="m1"
               label="僚艦"
-              value={false}
-              onChange={() => {}}
+              value={formation[1][0] > 0}
+              onClick={() => {
+                handleFormation(true, 0, formation[1][0] > 0 ? 0 : 1);
+              }}
             />
             <OnOffButton
               id="m2"
               label="旗艦"
-              value={false}
-              onChange={() => {}}
+              value={formation[1][1] > 0}
+              onClick={() => {
+                handleFormation(true, 1, formation[1][1] > 0 ? 0 : 1.5);
+              }}
             />
             <OnOffButton
               id="m3"
               label="僚艦"
-              value={false}
-              onChange={() => {}}
+              value={formation[1][2] > 0}
+              onClick={() => {
+                handleFormation(true, 2, formation[1][2] > 0 ? 0 : 1);
+              }}
             />
             <p>前衛</p>
             <OnOffButton
               id="v1"
               label="前衛"
-              value={false}
-              onChange={() => {}}
+              value={formation[1][3] > 0}
+              onClick={() => {
+                handleFormation(true, 3, formation[1][3] > 0 ? 0 : 1);
+              }}
             />
             <OnOffButton
               id="v2"
               label="前衛"
-              value={false}
-              onChange={() => {}}
+              value={formation[1][4] > 0}
+              onClick={() => {
+                handleFormation(true, 4, formation[1][4] > 0 ? 0 : 1);
+              }}
             />
             <OnOffButton
               id="v3"
               label="前衛"
-              value={false}
-              onChange={() => {}}
+              value={formation[1][5] > 0}
+              onClick={() => {
+                handleFormation(true, 5, formation[1][5] > 0 ? 0 : 1);
+              }}
             />
           </div>
           <div className="grid w-full grid-cols-[2fr_1fr] items-center gap-2 text-center">
-            <div className="flex items-center justify-between">
-              <p className="grow">コンディション</p>
-              <ToggleButton
-                id="condition_bonus_toggle"
-                value={conditionBonus[1]}
-                setValue={() =>
-                  setConditionBonus([conditionBonus[0], !conditionBonus[1]])
-                }
-              />
-            </div>
-            <NumberInput id="condition_bonus" value={expBonus[0]} disabled />
-            <div className="flex items-center justify-between">
-              <p className="grow">MVP</p>
-              <ToggleButton
-                id="condition_bonus_toggle"
-                value={+mvpBonus[1] > 0}
-                setValue={() =>
-                  setMvpBonus([mvpBonus[0], +mvpBonus[1] > 0 ? "0" : "1"])
-                }
-              />
-            </div>
+            <p>コンディション</p>
+            <SelectInput
+              id="condition_bonus"
+              value={conditionBonus[1]}
+              setValue={(bonus) =>
+                setConditionBonus([conditionBonus[0], bonus])
+              }
+              options={[
+                {
+                  value: "0",
+                  label: "なし",
+                },
+                {
+                  value: "1",
+                  label: "20%",
+                },
+              ]}
+            />
+            <p>MVP</p>
             <SelectInput
               id="mvp_b"
               value={mvpBonus[1]}
@@ -316,16 +328,7 @@ export default function AreaField() {
                 },
               ]}
             />
-            <div className="flex items-center justify-between">
-              <p className="grow">その他(累計)</p>
-              <ToggleButton
-                id="condition_bonus_toggle"
-                value={otherBonus[1] > 0}
-                setValue={() =>
-                  setOtherBonus([otherBonus[0], otherBonus[1] > 0 ? 0 : 20])
-                }
-              />
-            </div>
+            <p>その他(累計)</p>
             <NumberInput
               id="condition_bonus"
               value={otherBonus[1]}

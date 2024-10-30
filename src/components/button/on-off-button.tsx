@@ -2,7 +2,7 @@ interface OnOffButtonProps {
   id: string;
   label: string;
   value: boolean;
-  onChange: () => void;
+  onClick: () => void;
 }
 
 const OnOffButton = (props: OnOffButtonProps) => {
@@ -14,6 +14,7 @@ const OnOffButton = (props: OnOffButtonProps) => {
           ? "bg-blue-500 text-white"
           : "border border-gray-500 text-gray-500",
       ].join(" ")}
+      onClick={props.onClick}
     >
       {props.label}
     </button>

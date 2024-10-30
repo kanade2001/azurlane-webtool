@@ -13,11 +13,13 @@ export const usePreferences = () => {
   const [selected, setSelected] = useState<string>("12-4");
   const [area, setArea] = useState<AreaExpDataType>(InitialAreaExpData);
 
-  const [expBonus, setExpBonus] = useState<number[]>([20, 0, 0, 0]);
-  const [conditionBonus, setConditionBonus] = useState<boolean[]>([
-    false,
-    false,
+  const [formation, setFormation] = useState<number[][]>([
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0],
   ]);
+
+  const [expBonus, setExpBonus] = useState<number[]>([20, 0, 0, 0]);
+  const [conditionBonus, setConditionBonus] = useState<string[]>(["1", "1"]);
   const [mvpBonus, setMvpBonus] = useState<string[]>(["0", "0"]);
   const [otherBonus, setOtherBonus] = useState<number[]>([0, 0]);
   const [exp, setExp] = useState<number[]>([0, 0]);
@@ -59,10 +61,14 @@ export const usePreferences = () => {
     }
   };
 
-  const handleExpBonus = (index: number, bonus: number) => {
-    const newBonus = [...expBonus];
-    newBonus[index] = bonus;
-    setExpBonus(newBonus);
+  const handleFormation = (
+    is_Boss: boolean = false,
+    index: number,
+    value: number,
+  ) => {
+    const newFormation = [...formation];
+    newFormation[is_Boss ? 1 : 0][index] = value;
+    setFormation(newFormation);
   };
 
   useEffect(() => {
@@ -81,7 +87,7 @@ export const usePreferences = () => {
     category,
     selected,
     area,
-    expBonus,
+    formation,
     conditionBonus,
     mvpBonus,
     otherBonus,
@@ -91,7 +97,7 @@ export const usePreferences = () => {
     handleSelected,
     handleCustomExp,
     handleCustomBattle,
-    handleExpBonus,
+    handleFormation,
     setConditionBonus,
     setMvpBonus,
     setOtherBonus,
