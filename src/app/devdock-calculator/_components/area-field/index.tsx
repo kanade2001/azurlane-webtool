@@ -106,9 +106,12 @@ export default function AreaField(props: AreaFieldProps) {
           )}
         </>
         {labels.map((label, index) => (
-          <>
+          <React.Fragment key={label}>
             <h3 className="text-xl">{label}</h3>
-            <div className="grid w-full grid-cols-2 items-center gap-2 text-center">
+            <div
+              className="grid w-full grid-cols-2 items-center gap-2 text-center"
+              key={label}
+            >
               <p>戦闘数</p>
               {category === "Custom" ? (
                 <NumberInputWithButton
@@ -135,7 +138,7 @@ export default function AreaField(props: AreaFieldProps) {
             </div>
             <div className="grid w-full grid-cols-4 items-center gap-2 text-center">
               {formLabel.map((group, groupIndex) => (
-                <React.Fragment key={groupIndex}>
+                <React.Fragment key={`${index}-${groupIndex}`}>
                   <p>{group.label}</p>
                   {group.buttons.map((buttonLabel, buttonIndex) => (
                     <OnOffButton
@@ -218,7 +221,7 @@ export default function AreaField(props: AreaFieldProps) {
                 }}
               />
             </div>
-          </>
+          </React.Fragment>
         ))}
       </div>
     </div>
