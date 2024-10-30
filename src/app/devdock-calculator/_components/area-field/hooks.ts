@@ -129,7 +129,7 @@ export const usePreferences = () => {
         (fleet[1].conditionBonus === "0" ? 1.2 : 1),
     );
 
-    setExp([exp_a_min + exp_b, exp_a_max, exp_b]);
+    setExp([exp_a_min + exp_b, exp_a_max + exp_b]);
   }, [area, fleet]);
 
   return {
