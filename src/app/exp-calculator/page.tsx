@@ -1,7 +1,7 @@
 "use client";
 
 import { ExpField, PreferenceField, ResultField } from "./_components";
-import { Footer } from "@/components/ui";
+import { Header, Footer } from "@/components/ui";
 
 import { useExpCalculator } from "./hooks";
 
@@ -11,6 +11,7 @@ export default function ExpCalculatorPage() {
 
   return (
     <>
+      <Header />
       <div className="px-5">
         <div className="mx-auto min-h-screen max-w-lg">
           <h1 className="my-10 text-4xl">周回経験値計算機</h1>
