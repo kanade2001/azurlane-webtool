@@ -20,7 +20,7 @@ export default function DevDockCalculatorPage() {
   return (
     <div className="flex min-h-screen w-full flex-col items-center">
       <Header />
-      <div className="flex w-full max-w-lg grow flex-col">
+      <div className="flex w-full max-w-lg grow flex-col px-5">
         <h1 className="my-10 text-4xl">開発ドック計算機</h1>
         <PreferenceField
           setTargetExp={(targetexp) => setTargetExp(targetexp)}
