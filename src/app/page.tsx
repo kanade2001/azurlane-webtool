@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div className="flex min-h-screen w-full flex-col items-center">
       <Header />
-      <div className="flex w-full max-w-lg grow flex-col">
+      <div className="flex w-full max-w-lg grow flex-col px-5">
         <h1 className="my-10 text-center text-4xl">アズールレーン WebTool</h1>
         <ul className="flex w-full flex-col items-center gap-2">
           <li className="my-2 w-full rounded-lg border border-gray-500 p-2">
